@@ -31,4 +31,8 @@ public class Config {
     public static String getFormPageUrl() {
         return getBaseUrl() + "form";
     }
+
+    public static String getIFramePageUrl() {
+        return getBaseUrl() + "iframe";
+    }
 }

@@ -163,15 +163,21 @@ public class KiwiduckWebsiteTest {
     }
 
     private void clickGreatReturnLink() {
-        WebElement returnLink = driver.findElement(By.linkText("Great! Return to menu"));
+        WebElement returnLink = driver.findElement(By.xpath("//label[@id='back']/a"));
         assert returnLink.isDisplayed();
         returnLink.click();
     }
 
     private void testIFramePage() {
-        System.out.println("Страница не готова к тестированию");
-        System.out.println("Не соответствует заданию!!!!");
+        driver.get(Config.getIFramePageUrl());
+        driver.switchTo().frame("code-frame");
+        WebElement codeElement = driver.findElement(By.xpath("//*[@id='code']"));
+        String codeText = codeElement.getText().replaceAll(".*?([a-z0-9]+)$", "$1");
+        driver.switchTo().defaultContent();
+        WebElement input = driver.findElement(By.xpath("//input[@name='code']"));
+        input.sendKeys(codeText);
+        WebElement button = driver.findElement(By.xpath("//input[@name='ok']"));
+        button.click();
+        clickGreatReturnLink();
     }
-
-
 }
